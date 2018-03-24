@@ -22,7 +22,7 @@ const styles = () => ({
   },
 });
 
-class Wallet extends React.Component { 
+class Wallet extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   // GABRIEL T: this and the following methods are used for wallect creation
   // followed tutorial at https://reactjs.org/docs/forms.html
@@ -38,62 +38,69 @@ class Wallet extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCurrency = this.handleCurrency.bind(this);
   }
 
   handleChange(event) {
     const target = event.target;
     const name = target.name;
     this.setState({username: target.value});
-    
+
   }
- 
+
+  handleCurrency(event) {
+    const target = event.target;
+    const name = target.name;
+    this.setState({currency: target.value});
+  }
+
   handleSubmit(event) {
     // CREATE & SAVE WALLET
 
     alert('new submission: ' + this.state.username + ' ' + this.state.currency);
+    this.props.onLoadWallets()
     event.preventDefault();
   }
 
     render() {
       return (
         <div>
-        <h4>Create wallet</h4>
-        {/* the PGG and CDN drop down doesn't do much yet for some reason the selection gets put in the text field */}
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Account username:
-            <input style= {{ border: 'solid grey 1px'}} type="text" name="username" value={this.state.username} onChange={this.handleChange} />
-          </label><br />
-          <label>
-            Currency:
-            <select name="currency" value={this.state.currency} onChange={this.handleChange}>
-              <option value="PGG">PGG</option>
-              <option value="CAD">CAD</option>
-            </select>
-          </label>
-          <input type="submit" value="Submit"/>
-        </form>
-        
-        <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
-          click here to load wallets
-        </button>
-        <LoadingError
-          loading={this.props.walletsLoading}
-          error={this.props.walletsError}
-          errorNode={<p>error</p>}
-        >
-          <div>
-            {this.props.wallets.map((wallet, index) => (
-              <div key={wallet.address}>
-                <h3>wallet {index}:</h3>
-                <div>
-                  <div><span>address: </span><span>{wallet.address}</span></div>
-                  <div><span>username: </span><span>{wallet.username }</span></div>
+          <h4>Create wallet</h4>
+          <form onSubmit={this.handleSubmit} style={{ border: 'solid grey 1px', maxWidth: '400px'}}>
+            <label>
+              Account username:
+              <input style= {{ border: 'solid grey 1px'}} type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+            </label><br />
+            <label>
+              Currency:
+              <select name="currency" value={this.state.currency} onChange={this.handleCurrency}>
+                <option value="PGG">PGG</option>
+                <option value="CAD">CAD</option>
+              </select>
+            </label><br />
+            <input type="submit" value="Submit" />
+          </form>
+
+          <button style={{ marginTop: '32px' }} onClick={this.props.onLoadWallets} className={this.props.classes.test}>
+            click here to load wallets
+          </button>
+          <LoadingError
+            loading={this.props.walletsLoading}
+            error={this.props.walletsError}
+            errorNode={<p>error</p>}
+          >
+            <div>
+              {this.props.wallets.map((wallet, index) => (
+                <div key={wallet.address}>
+                  <h3>wallet {index}:</h3>
+                  <div>
+                    <div><span>address: </span><span>{wallet.address}</span></div>
+                    <div><span>username: </span><span>{wallet.username }</span></div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </LoadingError>
+              ))}
+            </div>
+          </LoadingError>
       </div>
     );
   }
