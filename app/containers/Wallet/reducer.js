@@ -17,8 +17,12 @@ export const WALLETS_REDUCER_INITIAL_STATE = fromJS({
 function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
   switch (action.type) {
     case `${LOAD_WALLETS}${SUCCESS}`:
-      return state
-      .set('wallets', fromJS(action.entity));
+      return state.set('wallets', fromJS(action.entity));
+    case 'MYACTION':
+      console.log('fuck');
+      console.log(state.get('wallets'))
+      console.log(action)
+      return state;
     default:
       return state;
   }
