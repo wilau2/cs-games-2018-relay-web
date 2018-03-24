@@ -7,5 +7,10 @@ use node version manager.
 - `npm install`
 - `npm run start`
 
+
+## Developer notes
+
+
+
 ## References
 - https://github.com/react-boilerplate/react-boilerplate

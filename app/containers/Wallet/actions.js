@@ -5,3 +5,15 @@ export function loadWallets() {
     type: LOAD_WALLETS,
   };
 }
+
+export function onCreateWallet() {
+  return {
+    type: LOAD_WALLETS,
+  };
+}
+
+export function loadAccounts() {
+  return {
+    type: LOAD_WALLETS,
+  };
+}

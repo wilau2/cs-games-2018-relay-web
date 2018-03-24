@@ -23,17 +23,72 @@ const styles = () => ({
 });
 
 class Wallet extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  constructor(props) {
+    super(props);
+    this.state = {amount: '', account: ''};
+
+    this.handleChangeWalletValue = this.handleChangeWalletValue.bind(this);
+    this.handleSubmitChangeAccount = this.handleSubmitNewWallet.bind(this);
+  }
+
+  handleChangeWalletValue(event) {
+    this.setState({amount: event.target.value});
+  }
+
+  handleSubmitChangeAccount(event) {
+    this.setState({account: event.target.value});
+  }
+
+  handleSubmitNewWallet(event) {
+    alert('New wallet ' + this.state.amount);
+    this.props.onLoadWallets();
+    console.log(this.props.walletsLoading);
+    console.log(this.props.wallets);
+    event.preventDefault();
+  }
+
+  handleSubmitChangeAccount(event) {
+    alert('New wallet ' + this.state.amount);
+    this.props.onLoadWallets();
+    console.log(this.props.walletsLoading);
+    console.log(this.props.wallets);
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div>
+
+
         <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
           click here to load wallets
         </button>
+
         <LoadingError
           loading={this.props.walletsLoading}
           error={this.props.walletsError}
           errorNode={<p>error</p>}
         >
+        <form onSubmit={this.handleSubmitNewWallet}>
+          <label>
+            Create wallet:
+            amount
+            <input type="number" onChange={this.handleChangeWalletValue} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+
+        <form onSubmit={this.handleSubmitChangeAccount}>
+          <select onChange={this.handleChangeAccount} >
+            <option value="grapefruit">Grapefruit</option>
+            <option value="lime">Lime</option>
+            <option selected value="coconut">Coconut</option>
+            <option value="mango">Mango</option>
+          </select>
+        </form>
+
+
           <div>
             {this.props.wallets.map((wallet, index) => (
               <div key={wallet.address}>

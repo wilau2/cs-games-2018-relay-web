@@ -24,5 +24,11 @@
     "currency": "CAD",
     "amount": 3000,
     "username": "dying-penguin"
+  },
+  {
+    "address": "0xdyingpggrich",
+    "currency": "USD",
+    "amount": 432423000,
+    "username": "dying-penguin"
   }
 ]
