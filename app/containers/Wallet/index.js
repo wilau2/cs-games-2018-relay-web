@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withStyles } from 'material-ui/styles/index';
 
 import { createStructuredSelector } from 'reselect';
-import { loadWallets } from './actions';
+import { loadWallets, addWallet } from './actions';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import { WALLETS } from './constants';
@@ -23,9 +23,27 @@ const styles = () => ({
 });
 
 class Wallet extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      newaddress: "",
+      newusername: ""
+    };
+  }
+
   render() {
     return (
       <div>
+        <div>
+          <label>Address: </label>
+          <input placeholder="address" onChange={e => {this.setState({newaddress: e.target.value})}} value={this.state.newaddress}/><br/>
+          <label>Username: </label>
+          <input placeholder="username" onChange={e => {this.setState({newusername: e.target.value})}} value={this.state.newusername}/><br/>
+          <button onClick={this.props.onCreateWallet} className={this.props.classes.test}>Create wallet</button><br/>
+        </div><br/>
+
+        {/* todo: add input for account search + pass account (username) to fetch request*/}
+
         <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
           click here to load wallets
         </button>
@@ -61,6 +79,13 @@ export const mapDispatchToProps = (dispatch, ownProps) => ({
   onLoadWallets: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     dispatch(loadWallets());
+  },
+
+  onCreateWallet: (evt) => {
+    if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+    const address = this.state.newaddress
+    const username = this.state.newusername
+    dispatch(addWallet({address, username}))
   },
 });
 

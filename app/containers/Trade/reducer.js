@@ -2,39 +2,34 @@ import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 
 import {
-  LOAD_WALLETS,
-  ADD_WALLET
+  LOAD_TRADES
 } from './constants';
-
 import isLoadingReducer from '../../asyncDisplayer/containers/IsLoading/reducer';
 import hasErrorReducer from '../../asyncDisplayer/containers/HasError/reducer';
 import { SUCCESS } from '../../asyncDisplayer/containers/constants';
 
-export const WALLETS_REDUCER_INITIAL_STATE = fromJS({
-  wallets: []
+
+
+export const TRADES_REDUCER_INITIAL_STATE = fromJS({
+  trades: []
 });
 
-function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
+function tradeReducer(state = TRADES_REDUCER_INITIAL_STATE, action) {
   switch (action.type) {
-    case `${LOAD_WALLETS}${SUCCESS}`:
+    case `${LOAD_TRADES}${SUCCESS}`:
       return state
-      .set('wallets', fromJS(action.entity));
-    case `${ADD_WALLET}${SUCCESS}`:
-      return {...state, wallets: [...state.wallets, {
-        address: action.payload.address,
-        username: action.payload.username
-      }]}
+      .set('trades', fromJS(action.entity));
     default:
       return state;
   }
 }
 
 const options = {
-  action: LOAD_WALLETS,
+  action: LOAD_TRADES,
 };
 
 export default combineReducers({
-  entity: walletReducer,
+  entity: tradeReducer,
   isLoading: isLoadingReducer(options),
   hasError: hasErrorReducer(options),
 });
