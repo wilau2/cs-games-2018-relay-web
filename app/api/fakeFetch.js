@@ -15,7 +15,13 @@ export const fakeFetch = (urlGetter, options) => (
           default:
             //ugly hack to create immutable copy of file.
             const walletsCopied = JSON.parse(JSON.stringify(wallets));
-            return walletsCopied;
+
+            // filter on account
+            if (options.account) {
+              return walletsCopied.filter((wallet) => {
+                return wallet.username == options.account;
+              });
+            } else return walletsCopied;
         }
       case "/api/accounts":
         switch (true) {
