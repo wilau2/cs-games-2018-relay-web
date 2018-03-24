@@ -43,11 +43,13 @@ class Wallet extends React.Component {
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    this.setState({[name]: target.value});
+    this.setState({username: target.value});
+    console.log(this.state);
   }
  
   handleSubmit(event) {
     // CREATE & SAVE WALLET
+
     alert('new submission: ' + this.state.username + ' ' + this.state.currency);
     event.preventDefault();
   }
@@ -59,7 +61,7 @@ class Wallet extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Account username:
-            <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+            <input style= {{ border: 'solid grey 1px'}} type="text" name="username" value={this.state.username} onChange={this.handleChange} />
           </label><br />
           <label>
             Currency:
