@@ -19,6 +19,8 @@ function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
     case `${LOAD_WALLETS}${SUCCESS}`:
       return state
       .set('wallets', fromJS(action.entity));
+    //I think may be there should exist much more cases to this switch
+    //and the actions may be added to the Wallet/actions.js file
     default:
       return state;
   }
