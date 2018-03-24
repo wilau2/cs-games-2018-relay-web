@@ -23,7 +23,22 @@ const styles = () => ({
 });
 
 class Wallet extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  calculate_total_value() {
+    let cad = 0;
+    let pgg = 0;
+    this.props.wallets.forEach((wallet) => {
+      if (wallet.currency == 'CAD')
+        cad += wallet.amount;
+      if (wallet.currency == 'PGG')
+        pgg += wallet.amount;
+    });
+
+    return cad + pgg;
+  }
+
   render() {
+
     return (
       <div>
         <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
@@ -35,12 +50,14 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
           errorNode={<p>error</p>}
         >
           <div>
+            <h2>Total account value: {this.calculate_total_value()} (CAD + PGG)</h2>
             {this.props.wallets.map((wallet, index) => (
               <div key={wallet.address}>
                 <h3>wallet {index}:</h3>
                 <div>
                   <div><span>address: </span><span>{wallet.address}</span></div>
                   <div><span>username: </span><span>{wallet.username }</span></div>
+                  <div><span>Amount :</span><span>{wallet.amount} {wallet.currency }</span></div>
                 </div>
               </div>
             ))}
