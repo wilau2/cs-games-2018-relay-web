@@ -38,9 +38,12 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
             {this.props.wallets.map((wallet, index) => (
               <div key={wallet.address}>
                 <h3>wallet {index}:</h3>
+
                 <div>
                   <div><span>address: </span><span>{wallet.address}</span></div>
                   <div><span>username: </span><span>{wallet.username }</span></div>
+                    <div><span>wallet currency:</span><span>{wallet.currency }</span></div>
+                    <div><span>wallet amount:</span><span>{wallet.amount }</span></div>
                 </div>
               </div>
             ))}
