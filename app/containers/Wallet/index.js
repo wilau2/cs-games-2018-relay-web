@@ -23,9 +23,34 @@ const styles = () => ({
 });
 
 class Wallet extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      newaddress: "",
+      newusername: ""
+    };
+    this.createWallet = this.createWallet.bind(this);
+  }
+  createWallet(){
+    this.props.wallets.push({
+      address: this.state.newaddress,
+      username: this.state.newusername
+    });
+  }
+
   render() {
     return (
       <div>
+        <div>
+          <label>Address: </label>
+          <input placeholder="address" onChange={e => {this.setState({newaddress: e.target.value})}} value={this.state.newaddress}/><br/>
+          <label>Username: </label>
+          <input placeholder="username" onChange={e => {this.setState({newusername: e.target.value})}} value={this.state.newusername}/><br/>
+          <button onClick={this.createWallet} className={this.props.classes.test}>Create wallet</button><br/>
+        </div><br/>
+
+        {/* todo: add input for account search + pass account (username) to fetch request*/}
+
         <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
           click here to load wallets
         </button>
