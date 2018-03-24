@@ -79,15 +79,6 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
           <input type="submit" value="Submit" />
         </form>
 
-        <form onSubmit={this.handleSubmitChangeAccount}>
-          <select onChange={this.handleChangeAccount} >
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option selected value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
-          </select>
-        </form>
-
 
           <div>
             {this.props.wallets.map((wallet, index) => (
