@@ -2,31 +2,29 @@ import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 
 import {
-  LOAD_WALLETS,
     DEPOSIT_TO_WALLET,
     TRADE_PRICE_WALLET,
     TOTAL_VALUE_WALLETS_BY_ACCOUNT,
     SHOW_CURRENCY_AND_AMOUNT_WALLET,
-    FIND_WALLET_BY_ACCOUNT,
     CREATE_WALLET,
+    DISPLAY_WALLETS,
+    LOAD_ACCOUNTS,
 } from './constants';
 import isLoadingReducer from '../../asyncDisplayer/containers/IsLoading/reducer';
 import hasErrorReducer from '../../asyncDisplayer/containers/HasError/reducer';
 import { SUCCESS } from '../../asyncDisplayer/containers/constants';
 
 
-export const WALLETS_REDUCER_INITIAL_STATE = fromJS({
-  wallets: [],
-  selected_username: null,
-  selected_wallet: null,
-  selected_address: null,
+export const ACCOUNTS_REDUCER_INITIAL_STATE = fromJS({
+  accounts: [],
+
 });
 
-function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
+function accountReducer(state = ACCOUNTS_REDUCER_INITIAL_STATE, action) {
   switch (action.type) {
-    case `${LOAD_WALLETS}${SUCCESS}`:
+    case `${LOAD_ACCOUNTS}${SUCCESS}`:
       return state
-      .set('wallets', fromJS(action.entity));
+      .set('accounts', fromJS(action.entity));
     case `${DEPOSIT_TO_WALLET}${SUCCESS}`:
       return state
               .set('wallets', fromJS(action.entity));
@@ -39,7 +37,7 @@ function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
     case `${SHOW_CURRENCY_AND_AMOUNT_WALLET}${SUCCESS}`:
       return state
               .set('wallets', fromJS(action.entity));
-    case `${FIND_WALLET_BY_ACCOUNT}${SUCCESS}`:
+    case `${DISPLAY_WALLETS}${SUCCESS}`:
       return state
               .set('wallets', fromJS(action.entity));
     case `${CREATE_WALLET}${SUCCESS}`:
@@ -51,11 +49,11 @@ function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
 }
 
 const options = {
-  action: LOAD_WALLETS,
+  action: LOAD_ACCOUNTS,
 };
 
 export default combineReducers({
-  entity: walletReducer,
+  entity: accountReducer,
   isLoading: isLoadingReducer(options),
   hasError: hasErrorReducer(options),
 });

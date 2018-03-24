@@ -1,7 +1,5 @@
 import { LOAD_WALLETS } from './constants';
 
-export function loadWallets() {
-  return {
-    type: LOAD_WALLETS,
-  };
-}
+export const loadWallets = () => ({
+  type: LOAD_WALLETS,
+});
