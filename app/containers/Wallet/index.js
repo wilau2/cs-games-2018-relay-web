@@ -26,6 +26,7 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div>
+        <h1> Current Exchange Rate: </h1>
         <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
           click here to load wallets
         </button>

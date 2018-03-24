@@ -1,5 +1,8 @@
 # Web skeleton
 
+## Team : BattleStar Concordia
+hour 1 : Tobi Decary-Larocque
+
 ## Quick start
 check in package.json engines to test with good version of node.
 use node version manager.
