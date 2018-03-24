@@ -44,7 +44,7 @@ class Wallet extends React.Component {
     const target = event.target;
     const name = target.name;
     this.setState({username: target.value});
-    console.log(this.state);
+    
   }
  
   handleSubmit(event) {
@@ -58,6 +58,7 @@ class Wallet extends React.Component {
       return (
         <div>
         <h4>Create wallet</h4>
+        {/* the PGG and CDN drop down doesn't do much yet for some reason the selection gets put in the text field */}
         <form onSubmit={this.handleSubmit}>
           <label>
             Account username:
