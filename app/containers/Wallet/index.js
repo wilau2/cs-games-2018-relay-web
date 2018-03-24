@@ -41,8 +41,11 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
                 <div>
                   <div><span>address: </span><span>{wallet.address}</span></div>
                   <div><span>username: </span><span>{wallet.username }</span></div>
+<<<<<<< HEAD
                   <div><span>amount: </span><span>{wallet.amount }</span></div>
                   <div><span>currency: </span><span>{wallet.currency }</span></div>
+=======
+>>>>>>> 2c6c5d20088fe4aa86bc7e092ac09eb5beb5c839
                 </div>
               </div>
             ))}
