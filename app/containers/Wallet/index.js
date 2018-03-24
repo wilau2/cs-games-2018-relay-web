@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withStyles } from 'material-ui/styles/index';
 
 import { createStructuredSelector } from 'reselect';
-import { loadWallets } from './actions';
+import { loadWallets, addWallet } from './actions';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import { WALLETS } from './constants';
@@ -29,13 +29,6 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
       newaddress: "",
       newusername: ""
     };
-    this.createWallet = this.createWallet.bind(this);
-  }
-  createWallet(){
-    this.props.wallets.push({
-      address: this.state.newaddress,
-      username: this.state.newusername
-    });
   }
 
   render() {
@@ -46,7 +39,7 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
           <input placeholder="address" onChange={e => {this.setState({newaddress: e.target.value})}} value={this.state.newaddress}/><br/>
           <label>Username: </label>
           <input placeholder="username" onChange={e => {this.setState({newusername: e.target.value})}} value={this.state.newusername}/><br/>
-          <button onClick={this.createWallet} className={this.props.classes.test}>Create wallet</button><br/>
+          <button onClick={this.props.onCreateWallet} className={this.props.classes.test}>Create wallet</button><br/>
         </div><br/>
 
         {/* todo: add input for account search + pass account (username) to fetch request*/}
@@ -86,6 +79,13 @@ export const mapDispatchToProps = (dispatch, ownProps) => ({
   onLoadWallets: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     dispatch(loadWallets());
+  },
+
+  onCreateWallet: (evt) => {
+    if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+    const address = this.state.newaddress
+    const username = this.state.newusername
+    dispatch(addWallet({address, username}))
   },
 });
 
