@@ -10,8 +10,6 @@
  */
 
 import React from 'react';
-<<<<<<< HEAD
-import {FormattedMessage} from 'react-intl';
 import messages from './messages';
 import Wallet from '../Wallet';
 import Trades from '../Trades';
@@ -26,19 +24,4 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             </div>
         );
     }
-=======
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import Wallet from '../Wallet';
-
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-      <div>
-        <FormattedMessage {...messages.header} />
-        <Wallet />
-      </div>
-    );
-  }
->>>>>>> 2c6c5d20088fe4aa86bc7e092ac09eb5beb5c839
 }
