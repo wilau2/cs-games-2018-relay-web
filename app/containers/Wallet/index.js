@@ -35,6 +35,9 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
           errorNode={<p>error</p>}
         >
           <div>
+              PGG/CAD current price<span>{this.props.trades}</span>
+          </div>
+          <div>
             {this.props.wallets.map((wallet, index) => (
               <div key={wallet.address}>
                 <h3>wallet {index}:</h3>
