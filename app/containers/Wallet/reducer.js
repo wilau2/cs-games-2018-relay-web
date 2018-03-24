@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 
 import {
-  LOAD_WALLETS
+  LOAD_WALLETS, ADD_WALLET
 } from './constants';
 import isLoadingReducer from '../../asyncDisplayer/containers/IsLoading/reducer';
 import hasErrorReducer from '../../asyncDisplayer/containers/HasError/reducer';
@@ -19,6 +19,9 @@ function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
     case `${LOAD_WALLETS}${SUCCESS}`:
       return state
       .set('wallets', fromJS(action.entity));
+    //DOES NOT WORK AT THE MOMENT
+    case `${ADD_WALLET}${SUCCESS}`:
+      return state.get('wallets').concat(action.entity);
     default:
       return state;
   }

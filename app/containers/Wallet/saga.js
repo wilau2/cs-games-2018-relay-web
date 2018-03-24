@@ -4,6 +4,9 @@ import request from '../../api/request';
 import { errorAction, successAction } from '../../asyncDisplayer/containers/actions';
 import { LOAD_WALLETS } from './constants';
 
+//Wallets are not actually fetched from a server,
+//they are simply grabbed from a wallets.json file,
+//see fakeFetch.js for more information.
 export function* fetchWallets(url, data) {
   try {
     const wallets = yield call(request, url, data);
