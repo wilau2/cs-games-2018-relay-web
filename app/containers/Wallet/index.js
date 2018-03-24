@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withStyles } from 'material-ui/styles/index';
 
 import { createStructuredSelector } from 'reselect';
-import { loadWallets } from './actions';
+import { createWallet, loadWallets } from './actions';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import { WALLETS } from './constants';
@@ -15,10 +15,12 @@ import { makeSelectLoading } from '../../asyncDisplayer/containers/IsLoading/sel
 import { makeSelectError } from '../../asyncDisplayer/containers/HasError/selectors';
 import LoadingError from '../../asyncDisplayer/components/LoadingError';
 
-
 const styles = () => ({
-  test: {
-    border: '2px solid',
+  btn: {
+    border: '1px solid',
+  },
+  section: {
+    border: '1px solid',
   },
 });
 
@@ -26,7 +28,10 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div>
-        <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
+        <button onClick={this.props.onCreateWallet} className={this.props.classes.btn}>
+          create wallet
+        </button>
+        <button onClick={this.props.onLoadWallets} className={this.props.classes.btn}>
           click here to load wallets
         </button>
         <LoadingError
@@ -42,6 +47,18 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
                   <div><span>address: </span><span>{wallet.address}</span></div>
                   <div><span>currency: </span><span>{wallet.currency }</span></div>
                   <div><span>amount: </span><span>{wallet.amount }</span></div>
+                </div>
+                <div className={this.props.classes.section}>
+                  <h2>Deposit</h2>
+                  <div>
+                    <span>currency: </span>
+                    <select>
+                      <option value="CAD">CAD</option>
+                      <option value="PGG">PGG</option>
+                    </select>
+                  </div>
+                  <div><span>amount: </span><input type="number"/></div>
+                  <button className={this.props.classes.btn}>Deposit</button>
                 </div>
               </div>
             ))}
@@ -59,6 +76,10 @@ export const mapStateToProps = createStructuredSelector({
 });
 
 export const mapDispatchToProps = (dispatch, ownProps) => ({
+  onCreateWallet: (evt) => {
+    if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+    // dispatch(createWallet());
+  },
   onLoadWallets: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     dispatch(loadWallets());
