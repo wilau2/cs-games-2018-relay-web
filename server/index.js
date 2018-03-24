@@ -1,3 +1,11 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('root')
+);
+
 /* eslint consistent-return:0 */
 
 const express = require('express');
