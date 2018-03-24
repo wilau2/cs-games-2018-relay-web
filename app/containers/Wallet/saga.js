@@ -17,6 +17,10 @@ export function* getWallets(data) {
   yield fetchWallets("/api/wallets", data);
 }
 
+export function* getAccounts(data) {
+  yield fetchWallets("/api/accounts", data);
+}
+
 export default function* instrumentResultData() {
   yield takeLatest(LOAD_WALLETS, getWallets);
 }

@@ -28,6 +28,14 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div>
+        <div>
+          <span>Account: </span>
+          <select>
+            <!--{this.props.accounts.map(account => (
+              <option value={account}>{account}</option>
+            ))}-->
+          </select>
+        </div>
         <button onClick={this.props.onCreateWallet} className={this.props.classes.btn}>
           create wallet
         </button>
