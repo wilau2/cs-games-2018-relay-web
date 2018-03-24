@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withStyles } from 'material-ui/styles/index';
 
 import { createStructuredSelector } from 'reselect';
-import { loadWallets } from './actions';
+import { loadWallets, addWallet } from './actions';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import { WALLETS } from './constants';
@@ -22,6 +22,7 @@ const styles = () => ({
   },
 });
 
+//FOCUS ON WALLET AMOUNTS (CAD and PGG)
 class Wallet extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
@@ -35,12 +36,14 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
           errorNode={<p>error</p>}
         >
           <div>
+            <button>Add Wallet</button>
             {this.props.wallets.map((wallet, index) => (
               <div key={wallet.address}>
                 <h3>wallet {index}:</h3>
                 <div>
                   <div><span>address: </span><span>{wallet.address}</span></div>
                   <div><span>username: </span><span>{wallet.username }</span></div>
+                  <div><span>amount: </span><span>{wallet.amount }</span></div>
                 </div>
               </div>
             ))}
@@ -61,6 +64,10 @@ export const mapDispatchToProps = (dispatch, ownProps) => ({
   onLoadWallets: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     dispatch(loadWallets());
+  },
+  onAddWallet: (evt) => {
+    if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+    dispatch(addWallet("flying-penguin"));
   },
 });
 
