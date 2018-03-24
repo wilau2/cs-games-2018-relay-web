@@ -13,12 +13,14 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import Wallet from '../Wallet';
+import CurrentAmount from '../CurrentAmount'
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
         <FormattedMessage {...messages.header} />
+        <CurrentAmount />
         <Wallet />
       </div>
     );
