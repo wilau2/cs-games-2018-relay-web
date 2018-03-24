@@ -4,6 +4,8 @@ import { compose } from 'redux';
 import { withStyles } from 'material-ui/styles/index';
 import { createStructuredSelector } from 'reselect';
 import { loadWallets } from './actions';
+import { createWallet } from "./actions";
+import { makeDeposit } from "./actions";
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import { WALLETS } from './constants';
@@ -22,43 +24,34 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
     render() {
         return (
             <div>
+                <button onClick={this.props.onCreateWallet} className={this.props.classes.test}>
+                    Create new wallet
+                </button>
             <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
-        click here to load wallets
-        </button>
+                Load all wallets
+            </button>
+                <button onClick={this.props.onMakeDeposit} className={this.props.classes.test}>
+                    Make a deposit
+                </button>
         <LoadingError
-        loading={this.props.walletsLoading}
-        error={this.props.walletsError}
-        errorNode={<p>error</p>}
+                loading={this.props.walletsLoading}
+                error={this.props.walletsError}
+                errorNode={<p>error</p>}
             >
-            <div>
-            {this.props.wallets.map((wallet, index) => (
-            <div key={wallet.address}>
-    <h3>wallet {index}:</h3>
-        <div>
-        <div><span>address: </span><span>{wallet.address}</span></div>
-        <div><span>username: </span><span>{wallet.username }</span></div>
-        /*
-        * Display amount and currency of wallets*/
-        <div><span>amount: </span><span>{wallet.amount }</span></div>
-        <div><span>currency: </span><span>{wallet.currency }</span></div>
-        </div>
-        </div>
-    ))}
-    </div>
-        /*
-        * Display current trade price here */
-        /*          <div>
-                    <h3>Current PGG/CAD Price:</h3>
-                      {this.props.trades.map((trades, index) => (
-                          <div key={trades.date}>
-                            <h3>prices {index}:</h3>
+                <div>
+                    {this.props.wallets.map((wallet, index) => (
+                        <div key={wallet.address}>
+                            <h3>wallet {index}:</h3>
                             <div>
-                              <div><span>price: </span><span>{trades.price}</span></div>
+                                <div><span>address: </span><span>{wallet.address}</span></div>
+                                <div><span>username: </span><span>{wallet.username }</span></div>
+                                <div><span>amount: </span><span>{wallet.amount }</span></div>
+                                <div><span>currency: </span><span>{wallet.currency }</span></div>
                             </div>
-                          </div>
-                      ))}
-                  </div>*/
-        </LoadingError>
+                        </div>
+                    ))}
+                </div>
+            </LoadingError>
         </div>
     );
     }
@@ -73,6 +66,14 @@ export const mapDispatchToProps = (dispatch, ownProps) => ({
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
 dispatch(loadWallets());
 },
+    onCreateWallet: (evt) => {
+        if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+        dispatch(createWallet());
+    },
+    onMakeDeposit: (evt) => {
+        if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+        dispatch(makeDeposit());
+    }
 });
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withSurveyReducer = injectReducer({
