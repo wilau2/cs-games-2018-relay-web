@@ -24,10 +24,38 @@ const styles = () => ({
 
 class Wallet extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    // return (
+    //   <div>
+    //     <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
+    //       click here to load wallets
+    //     </button>
+    //     <LoadingError
+    //       loading={this.props.walletsLoading}
+    //       error={this.props.walletsError}
+    //       errorNode={<p>error</p>}
+    //     >
+    //       <div>
+    //         {this.props.wallets.map((wallet, index) => (
+    //           <div key={wallet.address}>
+    //             <h3>wallet {index}:</h3>
+    //             <div>
+    //               <div><span>address: </span><span>{wallet.address}</span></div>
+    //               <div><span>username: </span><span>{wallet.username }</span></div>
+    //             </div>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </LoadingError>
+    //   </div>
+    // );
+
     return (
       <div>
         <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
           click here to load wallets
+        </button>
+        <button onClick={this.props.onCreateWallet} className={this.props.classes.test}>
+          click here to add a wallet
         </button>
         <LoadingError
           loading={this.props.walletsLoading}
@@ -62,6 +90,12 @@ export const mapDispatchToProps = (dispatch, ownProps) => ({
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     dispatch(loadWallets());
   },
+  onCreateWallet: (evt) => {
+    if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+    dispatch({
+      type: 'MYACTION'
+    });
+  }
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
