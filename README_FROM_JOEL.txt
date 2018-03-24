@@ -5,4 +5,5 @@ on. The main stuff is in app/containers/Wallet/index.js. I've added the button
 to that prints 'fuck' in the web console (took the whole time to just figure
 out how to do that). I created an action MYACTION for that button press that is
 handled in reducer.js in the same directory. Somehow we need to modify the
-wallets in the action but I didn't have time to figure out how.
+wallets in the action but I didn't have time to figure out how. Also we need to
+modify the react pseudo-HTML to create an interface for it.
