@@ -23,9 +23,36 @@ const styles = () => ({
 });
 
 class Wallet extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props){
+    super(props)
+    this.state = {
+        email: "select a email"
+    };
+    this.onChange = this.onChange.bind(this);
+  }
+  onChange(event)
+  {
+    amout = 0
+    for (wallet in this.wallets)
+    {
+      if (wallet.address == event.target.value)
+      {
+        amout = wallet.amount
+      }
+    }
+    this.setState({email : amout});
+  }
   render() {
     return (
       <div>
+        {this.state.email}<br/>
+        SELECT A WALLET :) :) :) :) <br/><br/>
+          <select name="emailChoice" id="emailChoice" onChange={this.onChange}>
+              {this.props.wallets.map( (wallet, index) => {
+                  return <option value={wallet.address} key={wallet.address}>{wallet.currency}: {wallet.username}@{wallet.address}</option>;
+              })}
+          </select> <br/><br/>
+          <hr/>
         <button onClick={this.props.onLoadWallets} className={this.props.classes.test}>
           click here to load wallets
         </button>
@@ -40,7 +67,10 @@ class Wallet extends React.Component { // eslint-disable-line react/prefer-state
                 <h3>wallet {index}:</h3>
                 <div>
                   <div><span>address: </span><span>{wallet.address}</span></div>
-                  <div><span>username: </span><span>{wallet.username }</span></div>
+                    <div><span>username: </span><span>{wallet.username }</span></div>
+                    <div><span>Currency: </span><span>{wallet.currency }</span></div>
+                    <div><span>Amount: </span><span>{wallet.amount}</span></div>
+                    <hr/>
                 </div>
               </div>
             ))}
